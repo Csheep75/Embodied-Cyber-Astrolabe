@@ -1,0 +1,20 @@
+idf_component_register(
+    SRCS
+        "main.c"
+        "cat_state_machine.c"
+        "oracle_state_machine.c"
+        "sensor_tof.c"
+        "sensor_touch.c"
+        "comm_espnow.c"
+        "demo_mode.c"
+    INCLUDE_DIRS "."
+    REQUIRES
+        shared
+        pca9685
+        servo_mg90s
+        servo_20kg
+        stepper_28byj
+        hall_sensor
+        ws2812_led
+        power_monitor
+)
