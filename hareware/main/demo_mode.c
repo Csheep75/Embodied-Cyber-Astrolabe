@@ -1,36 +1,39 @@
 #include "demo_mode.h"
 
-#include "big_servo.h"
-#include "cat_state_machine.h"
-#include "comm_espnow.h"
-#include "hall_sensor.h"
-#include "mg90s.h"
-#include "oracle_state_machine.h"
-#include "power_monitor.h"
-#include "sensor_tof.h"
-#include "sensor_touch.h"
-#include "stepper_28byj.h"
-#include "ws2812_led.h"
+#include "board_bringup.h"
+#include "board_role.h"
+#include "demo_console.h"
+#include "hardware_config.h"
 
 #include "esp_log.h"
 
 static const char *TAG = "demo";
+static demo_mode_t s_demo_mode = DEMO_MODE_IDLE;
+
+demo_mode_t demo_mode_get(void)
+{
+    return s_demo_mode;
+}
+
+esp_err_t demo_mode_set(demo_mode_t mode, bool broadcast_peer)
+{
+    if (mode >= DEMO_MODE_MAX) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    s_demo_mode = mode;
+    ESP_LOGI(TAG, "mode=%d role=%s", (int)mode, board_role_name(board_role_get()));
+
+    if (broadcast_peer) {
+        extern esp_err_t comm_espnow_send_demo_mode(demo_mode_t m);
+        (void)comm_espnow_send_demo_mode(mode);
+    }
+    return ESP_OK;
+}
 
 esp_err_t demo_mode_init(void)
 {
-    ESP_LOGI(TAG, "hardware bring-up (demo order)");
-
-    (void)power_monitor_init();
-    (void)mg90s_init();
-    (void)big_servo_init();
-    (void)stepper_28byj_init();
-    (void)hall_sensor_init();
-    (void)ws2812_led_init();
-    (void)sensor_tof_init();
-    (void)sensor_touch_init();
-    (void)comm_espnow_init();
-    (void)cat_state_machine_init();
-    (void)oracle_state_machine_init();
-
-    return ESP_OK;
+    ESP_LOGI(TAG, "unified firmware hw=%s", HW_CONFIG_VERSION);
+    esp_err_t err = board_bringup();
+    demo_console_start();
+    return err;
 }

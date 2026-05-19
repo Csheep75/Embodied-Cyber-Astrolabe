@@ -1,0 +1,10 @@
+version,v0.3-unified,date,,commit,,board,eye,owner,
+seq,module,macro_name,esp32_gpio,peripheral_pin,level,wire_color,notes
+0,Role,HW_BOARD_STRAP_GPIO,48,(悬空),3.3V,,内部上拉=cat；WROOM板接GND=oracle
+1,Power,,USB,5V/GND,5V,,板载供电
+2,Camera,,FPC,板载,3.3V,,无需飞线
+3,Display,,FPC,板载,3.3V,,无需飞线
+4,ToF,HW_CAT_I2C_SDA,NC,待填,3.3V,,
+5,ToF,HW_CAT_I2C_SCL,NC,待填,3.3V,,
+6,Touch,HW_TOUCH_GPIO,NC,待填,3.3V,,
+7,LED,HW_WS2812_GPIO,NC,待填,5V,,

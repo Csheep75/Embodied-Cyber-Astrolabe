@@ -1,11 +1,20 @@
 #include "demo_mode.h"
+#include "board_role.h"
 
 #include "esp_log.h"
+#include "nvs_flash.h"
 
 static const char *TAG = "main";
 
 void app_main(void)
 {
-    ESP_LOGI(TAG, "Mao.exe firmware start");
+    esp_err_t err = nvs_flash_init();
+    if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ESP_ERROR_CHECK(nvs_flash_init());
+    }
+
+    ESP_LOGI(TAG, "Mao.exe unified firmware");
     demo_mode_init();
+    ESP_LOGI(TAG, "running as %s", board_role_name(board_role_get()));
 }

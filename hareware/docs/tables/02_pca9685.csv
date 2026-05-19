@@ -1,0 +1,7 @@
+item,value,notes
+i2c_port,I2C_NUM_0,WROOM only
+sda_gpio,8,HW_I2C_SDA_GPIO
+scl_gpio,9,HW_I2C_SCL_GPIO
+addr_7bit,0x40,HW_PCA9685_ADDR
+scl_hz,100000,code default
+addr_jumpers,A0-A5 GND,record actual solder

@@ -1,0 +1,10 @@
+id,location,pca_channel,pulse_min_us,pulse_center_us,pulse_max_us,angle_min_deg,angle_max_deg,sign,batch,tester,notes
+S01,head/ear,0,,1500,,,,+1,,
+S02,,1,,,,,,,,
+S03,,2,,,,,,,,
+S04,,3,,,,,,,,
+S05,,4,,,,,,,,
+S06,,5,,,,,,,,
+S07,,6,,,,,,,,
+S08,,7,,,,,,,,
+BIG1,bristle,8,,,,,,,,,HW_BIG_SERVO_PCA_CH

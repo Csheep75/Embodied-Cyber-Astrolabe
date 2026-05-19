@@ -1,0 +1,5 @@
+branch,source,voltage,loads,rated_a,fuse,decoupling,notes
+LOGIC_3V3,USB/LDO,3.3V,ESP32 PCA9685 logic Hall,,
+SERVO_5V,DC adapter,5V,MG90S BIG servo,,
+STEPPER_5V,DC adapter,5V,28BYJ driver,,
+GND_STAR,single point,GND,all returns,,

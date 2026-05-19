@@ -17,7 +17,7 @@ esp_err_t hall_sensor_init(void)
     };
     esp_err_t err = gpio_config(&io);
     if (err == ESP_OK) {
-        ESP_LOGI(TAG, "init on gpio %d", (int)HW_HALL_GPIO);
+        ESP_LOGI(TAG, "init gpio %d", (int)HW_HALL_GPIO);
     }
     return err;
 }

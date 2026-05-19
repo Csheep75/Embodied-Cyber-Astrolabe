@@ -1,20 +1,27 @@
 idf_component_register(
     SRCS
         "main.c"
+        "demo_mode.c"
+        "board_role.c"
+        "board_bringup.c"
+        "demo_console.c"
+        "comm_espnow.c"
         "cat_state_machine.c"
         "oracle_state_machine.c"
         "sensor_tof.c"
         "sensor_touch.c"
-        "comm_espnow.c"
-        "demo_mode.c"
     INCLUDE_DIRS "."
     REQUIRES
         shared
+        nvs_flash
+        esp_wifi
+        esp_event
+        esp_netif
+        power_monitor
+        ws2812_led
         pca9685
         servo_mg90s
         servo_20kg
         stepper_28byj
         hall_sensor
-        ws2812_led
-        power_monitor
 )

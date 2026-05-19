@@ -1,0 +1,22 @@
+version,v0.3-unified,date,,commit,,board,wroom,owner,
+seq,module,macro_name,esp32_gpio,peripheral_pin,level,wire_color,notes
+0,Role,HW_BOARD_STRAP_GPIO,48,GND,0V,black,接GND=oracle；与EYE同时上电
+1,I2C,HW_I2C_SDA_GPIO,8,PCA9685 SDA,3.3V,yellow,ESP32-S3 valid; no GPIO22
+2,I2C,HW_I2C_SCL_GPIO,9,PCA9685 SCL,3.3V,green,
+3,I2C,,3V3,PCA9685 VCC,3.3V,red,logic power
+4,I2C,,GND,PCA9685 GND,GND,black,common ground with servo PSU
+5,Hall,HW_HALL_GPIO,4,Hall OUT,3.3V,white,low=triggered
+6,Stepper,HW_STEPPER_IN1,14,ULN2003 IN1,3.3V,,was invalid GPIO25 on S3
+7,Stepper,HW_STEPPER_IN2,26,ULN2003 IN2,3.3V,,
+8,Stepper,HW_STEPPER_IN3,27,ULN2003 IN3,3.3V,,
+9,Stepper,HW_STEPPER_IN4,33,ULN2003 IN4,3.3V,,
+10,Stepper,,5V ext,ULN2003 +,5V,red,separate 5V branch
+11,Servo,S01,PCA CH0,signal orange,5V,,fill 05_servo_map.csv
+12,Servo,S02,PCA CH1,signal orange,5V,,
+13,Servo,S03,PCA CH2,signal orange,5V,,
+14,Servo,S04,PCA CH3,signal orange,5V,,
+15,Servo,S05,PCA CH4,signal orange,5V,,
+16,Servo,S06,PCA CH5,signal orange,5V,,
+17,Servo,S07,PCA CH6,signal orange,5V,,
+18,Servo,S08,PCA CH7,signal orange,5V,,
+19,Servo,BIG1,PCA CH8,signal,5-6V,,HW_BIG_SERVO_PCA_CH

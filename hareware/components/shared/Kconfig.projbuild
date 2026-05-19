@@ -1,0 +1,21 @@
+menu "Hareware"
+
+    choice BOARD_ROLE_OVERRIDE
+        prompt "Board role (development override)"
+        default BOARD_ROLE_AUTO
+        help
+            Auto: strap GPIO48 + PCA9685 I2C probe (production).
+            两块板烧录同一固件，无需改 sdkconfig。
+
+        config BOARD_ROLE_AUTO
+            bool "Auto detect at boot"
+
+        config BOARD_ROLE_FORCE_ORACLE
+            bool "Force Oracle (WROOM)"
+
+        config BOARD_ROLE_FORCE_CAT
+            bool "Force Cat (EYE)"
+
+    endchoice
+
+endmenu

@@ -9,16 +9,16 @@ static i2c_master_bus_handle_t s_bus;
 static i2c_master_dev_handle_t s_dev;
 static bool s_inited;
 
-esp_err_t pca9685_init(void)
+static esp_err_t pca9685_bus_create(void)
 {
-    if (s_inited) {
+    if (s_bus) {
         return ESP_OK;
     }
 
     const i2c_master_bus_config_t bus_cfg = {
-        .i2c_port = HW_I2C_PORT,
-        .sda_io_num = HW_I2C_SDA_GPIO,
-        .scl_io_num = HW_I2C_SCL_GPIO,
+        .i2c_port = HW_ORACLE_I2C_PORT,
+        .sda_io_num = HW_ORACLE_I2C_SDA,
+        .scl_io_num = HW_ORACLE_I2C_SCL,
         .clk_source = I2C_CLK_SRC_DEFAULT,
         .glitch_ignore_cnt = 7,
         .intr_priority = 0,
@@ -26,9 +26,42 @@ esp_err_t pca9685_init(void)
         .flags = {.enable_internal_pullup = true},
     };
 
-    esp_err_t err = i2c_new_master_bus(&bus_cfg, &s_bus);
+    return i2c_new_master_bus(&bus_cfg, &s_bus);
+}
+
+bool pca9685_probe(void)
+{
+    if (HW_ORACLE_I2C_SDA == GPIO_NUM_NC || HW_ORACLE_I2C_SCL == GPIO_NUM_NC) {
+        return false;
+    }
+    if (pca9685_bus_create() != ESP_OK) {
+        return false;
+    }
+
+    i2c_master_dev_handle_t probe_dev;
+    const i2c_device_config_t dev_cfg = {
+        .dev_addr_length = I2C_ADDR_BIT_LEN_7,
+        .device_address = HW_PCA9685_ADDR,
+        .scl_speed_hz = 100000,
+    };
+
+    esp_err_t err = i2c_master_bus_add_device(s_bus, &dev_cfg, &probe_dev);
     if (err != ESP_OK) {
-        ESP_LOGE(TAG, "i2c_new_master_bus: %s", esp_err_to_name(err));
+        return false;
+    }
+    i2c_master_bus_rm_device(probe_dev);
+    return true;
+}
+
+esp_err_t pca9685_init(void)
+{
+    if (s_inited) {
+        return ESP_OK;
+    }
+
+    esp_err_t err = pca9685_bus_create();
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "i2c bus: %s", esp_err_to_name(err));
         return err;
     }
 
@@ -42,9 +75,7 @@ esp_err_t pca9685_init(void)
 
     err = i2c_master_bus_add_device(s_bus, &dev_cfg, &s_dev);
     if (err != ESP_OK) {
-        ESP_LOGE(TAG, "i2c_master_bus_add_device: %s", esp_err_to_name(err));
-        i2c_del_master_bus(s_bus);
-        s_bus = NULL;
+        ESP_LOGE(TAG, "add_device: %s", esp_err_to_name(err));
         return err;
     }
 

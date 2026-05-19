@@ -1,0 +1,5 @@
+id,test_point,no_load_v,load_condition,loaded_v,pass_criteria,date,operator,notes
+1,ESP 3V3,,power on only,,3.2-3.4,,
+2,SERVO_5V,,one MG90S move,,>=4.8,,
+3,SERVO_5V,,all servos move,,no brownout reset,,
+4,GND_short,off,continuity beep,,must not short VCC,,

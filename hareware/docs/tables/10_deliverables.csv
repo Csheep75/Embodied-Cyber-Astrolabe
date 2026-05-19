@@ -1,0 +1,15 @@
+task,deliverable,table_or_media,code_evidence,board
+wiring,wiring sheet,01_wiring_*.csv,hardware_config_*.{h},both
+power_diagram,power branches,03_power.csv,optional ADC log,wroom
+power_test,test record,04_power_test.csv,no brownout on boot,both
+pca9685,test video,,serial pca9685 init ok,wroom
+mg90s,servo map,05_servo_map.csv,servo sweep demo,wroom
+big_servo,test video,,big_servo action,wroom
+motion,angle table,06_motion.csv,cat_state_machine frames,eye
+structure,photos,,,mechanical
+shell,photos,,,mechanical
+stepper,test video,,stepper demo,wroom
+turntable,structure photos,,,mechanical
+hall_homing,test record,07_hall_homing.csv,hall_sensor read,wroom
+wiring_photos,internal photos,,,both
+stability,test table,08_stability.csv,reset reason log,both

@@ -1,0 +1,5 @@
+action,frame,time_ms,S01_deg,S02_deg,S03_deg,S04_deg,S05_deg,S06_deg,S07_deg,S08_deg,BIG1_deg,notes
+pet_head,0,0,,,,,,,,,,start pose
+pet_head,1,300,,,,,,,,,,
+surprise_bristle,0,0,,,,,,,,,,
+tail_protest,0,0,,,,,,,,,,

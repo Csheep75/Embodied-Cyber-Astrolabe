@@ -1,7 +1,0 @@
-menu "PCA9685"
-    config PCA9685_I2C_ADDR
-        hex "PCA9685 I2C address"
-        default 0x40
-        help
-            7-bit I2C address of the PCA9685 module.
-endmenu

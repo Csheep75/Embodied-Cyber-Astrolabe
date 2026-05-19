@@ -1,0 +1,11 @@
+run,power_on,direction,steps_after_trigger,error_steps,notes
+1,cold,CW,,,
+2,cold,CW,,,
+3,cold,CW,,,
+4,cold,CW,,,
+5,cold,CW,,,
+6,cold,CW,,,
+7,cold,CW,,,
+8,cold,CW,,,
+9,cold,CW,,,
+10,cold,CW,,,range=max-min
